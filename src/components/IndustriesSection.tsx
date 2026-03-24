@@ -1,41 +1,54 @@
 import { motion } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
-import { ShoppingCart, Pickaxe, Fuel, Factory } from 'lucide-react';
+import { ShoppingCart, Pickaxe, Fuel, Factory, Building2, Pill, Atom, GraduationCap, Truck, Car, Shirt, Zap as ZapIcon, Clapperboard, Warehouse } from 'lucide-react';
 
 const industries = [
-  { icon: ShoppingCart, title: 'Retail', desc: 'Omnichannel retail solutions with real-time inventory, POS integration, and customer analytics.', color: 'from-blue-500/20 to-cyan-500/20' },
-  { icon: Pickaxe, title: 'Metals & Mining', desc: 'Optimized operations for mining companies with asset management, quality control, and supply chain visibility.', color: 'from-amber-500/20 to-orange-500/20' },
-  { icon: Fuel, title: 'Oil & Gas', desc: 'Upstream, midstream, and downstream solutions with HSE compliance and resource planning.', color: 'from-emerald-500/20 to-teal-500/20' },
-  { icon: Factory, title: 'Manufacturing', desc: 'Smart manufacturing with MES integration, production planning, and quality management.', color: 'from-violet-500/20 to-purple-500/20' },
+  { icon: ShoppingCart, title: 'Retail' },
+  { icon: Pickaxe, title: 'Metals & Mining' },
+  { icon: Fuel, title: 'Oil & Gas' },
+  { icon: Factory, title: 'Manufacturing' },
+  { icon: Building2, title: 'Construction' },
+  { icon: Pill, title: 'Pharmaceutical' },
+  { icon: Atom, title: 'Chemical' },
+  { icon: GraduationCap, title: 'Education' },
+  { icon: ZapIcon, title: 'Energy & Utilities' },
+  { icon: Clapperboard, title: 'Entertainment' },
+  { icon: Shirt, title: 'Textiles' },
+  { icon: Truck, title: 'Logistics' },
+  { icon: Car, title: 'Automotive' },
+  { icon: Warehouse, title: 'Warehouse' },
 ];
 
 const IndustriesSection = () => (
-  <section id="industries" className="py-24 lg:py-32">
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="industries" className="py-24 lg:py-36 relative">
+    <div className="absolute inset-0 bg-muted/30 dark:bg-transparent" />
+    <div className="absolute inset-0 dark:opacity-100 opacity-0" style={{ background: 'var(--gradient-section)' }} />
+
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <AnimatedSection className="text-center mb-16">
-        <span className="text-primary font-semibold text-sm uppercase tracking-widest">Industries</span>
-        <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-4">
-          Sector <span className="gradient-text">Expertise</span>
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 mb-6">
+          <span className="text-primary font-bold text-xs uppercase tracking-[0.15em]">Industries We Serve</span>
+        </div>
+        <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-5">
+          Deep <span className="gradient-text">Domain Expertise</span>
         </h2>
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          Deep domain knowledge across key industries powering enterprise digital transformation
+          Proven track record across 14+ industries powering enterprise digital transformation
         </p>
       </AnimatedSection>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
         {industries.map((ind, i) => (
-          <AnimatedSection key={ind.title} delay={i * 0.1}>
+          <AnimatedSection key={ind.title} delay={i * 0.04} direction="scale">
             <motion.div
-              whileHover={{ y: -8, rotateY: 5 }}
-              transition={{ duration: 0.3 }}
-              className="glass-card p-8 text-center group hover:border-primary/30 transition-all duration-300 h-full"
-              style={{ perspective: '1000px' }}
+              whileHover={{ y: -6, scale: 1.05 }}
+              transition={{ duration: 0.25 }}
+              className="glass-card p-5 text-center group cursor-default"
             >
-              <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${ind.color} flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                <ind.icon className="w-10 h-10 text-primary" />
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+                <ind.icon className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-display text-xl font-semibold mb-3">{ind.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{ind.desc}</p>
+              <h3 className="font-display text-xs font-bold leading-tight">{ind.title}</h3>
             </motion.div>
           </AnimatedSection>
         ))}

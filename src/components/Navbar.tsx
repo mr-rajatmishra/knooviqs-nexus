@@ -6,7 +6,9 @@ const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
+  { label: 'Technologies', href: '#technologies' },
   { label: 'Industries', href: '#industries' },
+  { label: 'Team', href: '#team' },
   { label: 'Clients', href: '#clients' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -21,7 +23,7 @@ const Navbar = () => {
   }, [dark]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -30,78 +32,84 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass-nav shadow-lg' : 'bg-transparent'}`}
+      transition={{ duration: 0.7, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass-nav shadow-xl' : 'bg-transparent'}`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
-          <a href="#home" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="font-display font-bold text-primary-foreground text-sm">K</span>
+          <a href="#home" className="flex items-center gap-2.5 group">
+            <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+              <span className="font-display font-extrabold text-primary-foreground text-sm">K</span>
             </div>
-            <span className="font-display font-bold text-lg">
-              <span className="text-primary">KNooviq</span>
-              <span className="text-muted-foreground text-sm ml-1 hidden sm:inline">Industries</span>
-            </span>
+            <div className="flex flex-col">
+              <span className="font-display font-bold text-lg leading-tight tracking-tight">
+                <span className="text-primary">KNooviq</span>
+              </span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] leading-none hidden sm:block">Industries Pvt Ltd</span>
+            </div>
           </a>
 
-          {/* Desktop links */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden xl:flex items-center gap-0.5">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="px-4 py-2 rounded-lg text-sm font-medium text-foreground/70 hover:text-primary hover:bg-primary/10 transition-all duration-200"
+                className="px-3.5 py-2 rounded-lg text-sm font-medium text-foreground/70 hover:text-primary hover:bg-primary/8 transition-all duration-300 relative group"
               >
                 {item.label}
+                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary rounded-full transition-all duration-300 group-hover:w-4" />
               </a>
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <button
               onClick={() => setDark(!dark)}
-              className="p-2 rounded-lg text-foreground/70 hover:text-primary hover:bg-primary/10 transition-all"
+              className="p-2.5 rounded-xl text-foreground/60 hover:text-primary hover:bg-primary/8 transition-all duration-300"
               aria-label="Toggle theme"
             >
-              {dark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              <motion.div key={dark ? 'sun' : 'moon'} initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} transition={{ duration: 0.3 }}>
+                {dark ? <Sun className="w-[18px] h-[18px]" /> : <Moon className="w-[18px] h-[18px]" />}
+              </motion.div>
             </button>
-            <a href="#contact" className="hidden lg:inline-flex glow-button text-sm">
+            <a href="#contact" className="hidden xl:inline-flex glow-button text-sm font-semibold">
               Enquire Now
             </a>
             <button
-              className="lg:hidden p-2 text-foreground"
+              className="xl:hidden p-2.5 text-foreground rounded-xl hover:bg-primary/8 transition-all"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Menu"
             >
-              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden glass-nav border-t border-border/30"
+            transition={{ duration: 0.3 }}
+            className="xl:hidden glass-nav border-t border-border/20"
           >
             <div className="container mx-auto px-4 py-4 space-y-1">
-              {navItems.map((item) => (
-                <a
+              {navItems.map((item, i) => (
+                <motion.a
                   key={item.label}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block px-4 py-3 rounded-lg text-foreground/80 hover:text-primary hover:bg-primary/10 transition-all"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="block px-4 py-3 rounded-xl text-foreground/80 hover:text-primary hover:bg-primary/8 transition-all font-medium"
                 >
                   {item.label}
-                </a>
+                </motion.a>
               ))}
-              <a href="#contact" className="block mt-3 glow-button text-center text-sm">
+              <a href="#contact" onClick={() => setMobileOpen(false)} className="block mt-3 glow-button text-center text-sm">
                 Enquire Now
               </a>
             </div>
