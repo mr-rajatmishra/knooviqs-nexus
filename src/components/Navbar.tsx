@@ -58,15 +58,6 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => setDark(!dark)}
-              className="p-2.5 rounded-xl text-foreground/60 hover:text-primary hover:bg-primary/8 transition-all duration-300"
-              aria-label="Toggle theme"
-            >
-              <motion.div key={dark ? 'sun' : 'moon'} initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} transition={{ duration: 0.3 }}>
-                {dark ? <Sun className="w-[18px] h-[18px]" /> : <Moon className="w-[18px] h-[18px]" />}
-              </motion.div>
-            </button>
             <a href="#contact" className="hidden xl:inline-flex glow-button text-sm font-semibold">
               Enquire Now
             </a>
