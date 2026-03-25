@@ -139,7 +139,7 @@
   }
 
   .glow-button {
-    @apply font-semibold rounded-xl px-7 py-3.5 transition-all duration-400 relative overflow-hidden;
+    @apply font-semibold rounded-xl px-7 py-3.5 transition-all duration-300 relative overflow-hidden;
     background-image: var(--gradient-accent);
     color: hsl(0 0% 100%);
     box-shadow: 0 4px 24px hsl(195 100% 42% / 0.35);
